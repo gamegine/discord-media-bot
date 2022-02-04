@@ -1,4 +1,5 @@
 .devcontainer/
+config.json
 
 # Logs
 logs
