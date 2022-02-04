@@ -1,6 +1,7 @@
 // imports
 const fs = require("fs")
 const Discord = require("discord.js")
+const { getUrls } = require("./functions")
 
 // load config.json if exists
 // eslint-disable-next-line import/no-unresolved
@@ -27,8 +28,12 @@ client.on("message", (msg) => {
 	if (msg.author.bot) return
 	// get text from message
 	const text = msg.content.toLowerCase()
+	// get urls from text
+	const urls = getUrls(text)
+	// if no urls found ignore message
+	if (!urls.length) return
 	// eslint-disable-next-line no-console
-	console.log(text)
+	console.log(urls)
 })
 
 // start discord client by login with token
