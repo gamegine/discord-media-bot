@@ -21,5 +21,15 @@ client.on("error", (err) => console.error(`Error: ${err.message}`))
 // eslint-disable-next-line no-console
 client.on("ready", () => console.log(`Logged in as ${client.user.tag}!`))
 
+// for each message process
+client.on("message", (msg) => {
+	// ignore messages from bots
+	if (msg.author.bot) return
+	// get text from message
+	const text = msg.content.toLowerCase()
+	// eslint-disable-next-line no-console
+	console.log(text)
+})
+
 // start discord client by login with token
 client.login(token)
