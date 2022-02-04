@@ -1,6 +1,12 @@
+const fs = require("fs")
 const Discord = require("discord.js")
-const config = require("./config.json")
+
+// load config.json if exists
+// eslint-disable-next-line import/no-unresolved
+const config = fs.existsSync("./config.json") ? require("./config.json") : {}
+// load discord token from config or env
+const token = config.DISCORD_TOKEN || process.env.DISCORD_TOKEN
 
 const client = new Discord.Client()
 
-client.login(config.DISCORD_TOKEN)
+client.login(token)
