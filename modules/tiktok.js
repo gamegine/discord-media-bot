@@ -58,7 +58,14 @@ async function downloadTiktok(url) {
  */
 function onUrls(urls) {
 	const tiktokUrls = filterTiktok(urls)
-	return Promise.resolve({})
+	// download all tiktok videos
+	const downloadstasks = tiktokUrls.map(downloadTiktok)
+	return Promise.all(downloadstasks).then((files) => {
+		// eslint-disable-next-line no-console
+		console.log(`Downloaded ${tiktokUrls.length} tiktok videos`)
+		// finaly return all downloaded files
+		return { files }
+	})
 }
 
 // exports module functions
