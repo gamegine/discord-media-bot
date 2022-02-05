@@ -45,6 +45,8 @@ client.on("message", (msg) => {
 		.then((results) => {
 			// merge all results into one
 			const json = results.reduce((acc, result) => ({ ...acc, ...result }))
+			// if no data return
+			if (!json.files && !json.urls) return
 			// reply to discord with json data
 			msg
 				.reply(json.urls, { files: json.files })
