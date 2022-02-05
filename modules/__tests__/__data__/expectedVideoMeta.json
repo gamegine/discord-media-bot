@@ -1,0 +1,77 @@
+{
+	"id": "7056230663942360366",
+	"secretID": "7056230663942360366",
+	"text": "Why #wtf #memestiktok #fyp",
+	"createTime": 1642906728,
+	"authorMeta": {
+		"id": "6997478023537607686",
+		"secUid": "MS4wLjABAAAA7RkeEcFOGnAsLRPEEla9utJtIZ_aneSAOqJHTvI_uDKDyyfF6HfjyHdToPhnVDYK",
+		"name": "im_nukezztoo",
+		"nickName": "MemeHub",
+		"following": 1,
+		"fans": 347000,
+		"heart": 8400000,
+		"video": 79,
+		"digg": 2068,
+		"verified": false,
+		"private": false,
+		"signatumetare": "500k?",
+		"avatar": "https://p16-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/71c7e64485d1c6aa4703c20290e70f81~c5_1080x1080.jpeg?x-expires=1644105600&x-signature=kjz8quKKv3PrrfavkDXFmen%2FLZs%3D"
+	},
+	"musicMeta": {
+		"musicId": "7056230652450147119",
+		"musicName": "original sound",
+		"musicAuthor": "MemeHub",
+		"musicOriginal": true,
+		"coverThumb": "https://p16-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/71c7e64485d1c6aa4703c20290e70f81~c5_100x100.jpeg?x-expires=1644105600&x-signature=9dQLXDpkVLkwWHdjeVgdFDCsI3M%3D",
+		"coverMedium": "https://p16-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/71c7e64485d1c6aa4703c20290e70f81~c5_720x720.jpeg?x-expires=1644105600&x-signature=Uu6oZlOyICCFyRMiTwONdU6YCIA%3D",
+		"coverLarge": "https://p16-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/71c7e64485d1c6aa4703c20290e70f81~c5_1080x1080.jpeg?x-expires=1644105600&x-signature=kjz8quKKv3PrrfavkDXFmen%2FLZs%3D",
+		"duration": 5
+	},
+	"imageUrl": "https://p16-sign.tiktokcdn-us.com/obj/tos-useast5-p-0068-tx/8d10d2f4f4044d6eb5c7ffec67198ba5?x-expires=1644040800&x-signature=zJzTabS58L9Q1LfNFL683nbNJKk%3D",
+	"videoUrl": "https://v16-webapp.tiktok.com/33962d18a21a234cb2ab1c1dbcc89d0f/61fe163f/video/tos/maliva/tos-maliva-ve-0068c799-us/81f94a21781249a4a00f4bcb070e3592/?a=1988&br=2366&bt=1183&cd=0%7C0%7C1%7C0&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=XOQ9-3D_nz7ThxYZxlXq&l=2022020500162601019204603200F7DB17&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3ZxOTM6ZnFmOjMzZzczNEApZWgzNWloPGVoN2dmPDY8PGcvLmpucjRnNWpgLS1kMS9zc2AtYC0yMS02LTRgYzIzM2M6Yw%3D%3D&vl=&vr=",
+	"videoUrlNoWaterMark": "",
+	"videoApiUrlNoWaterMark": "",
+	"videoMeta": {
+		"width": 576,
+		"height": 844,
+		"ratio": "720p",
+		"duration": 5,
+		"duetEnabled": true,
+		"stitchEnabled": true,
+		"duetInfo": {
+			"duetFromId": "0"
+		}
+	},
+	"covers": {
+		"default": "https://p16-sign.tiktokcdn-us.com/obj/tos-useast5-p-0068-tx/8d10d2f4f4044d6eb5c7ffec67198ba5?x-expires=1644040800&x-signature=zJzTabS58L9Q1LfNFL683nbNJKk%3D",
+		"origin": "https://p16-sign.tiktokcdn-us.com/obj/tos-useast5-p-0068-tx/d67defbe187f4e01a82303c75bb28501_1642906733?x-expires=1644040800&x-signature=kZheLeVQKPvgkqRsGzTrHDL64uc%3D"
+	},
+	"diggCount": 578100,
+	"shareCount": 8912,
+	"playCount": 5400000,
+	"commentCount": 2606,
+	"downloaded": false,
+	"mentions": [],
+	"hashtags": [
+		{
+			"id": "9083",
+			"name": "wtf",
+			"title": "",
+			"cover": ""
+		},
+		{
+			"id": "1615484249350165",
+			"name": "memestiktok",
+			"title": "¡Llegaste al lugar indicado para encontrar memazos! \n\nCada viernes podrás encontrar a los 9 #MEMESTikTok oficiales de la semana.",
+			"cover": "https://p16-amd-va.tiktokcdn.com/obj/musically-maliva-obj/422f2c33d377dddff0f11cb5a276196f"
+		},
+		{
+			"id": "229207",
+			"name": "fyp",
+			"title": "",
+			"cover": ""
+		}
+	],
+	"effectStickers": []
+}
