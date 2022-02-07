@@ -40,7 +40,7 @@ async function downloadTiktok(url) {
 	const videoMeta = await getVideoMeta(url)
 	// output directory from env or default to current directory
 	const outputDir = process.env.DOWNLOAD_DIR || "."
-	const output = `${outputDir}/tiktok-${videoMeta.videoId}.mp4`
+	const output = `${outputDir}/tiktok-${videoMeta.id}.mp4`
 	await new Promise((resolve, reject) => {
 		got
 			.stream(videoMeta.videoUrl, { headers: videoMeta.headers })
@@ -58,6 +58,7 @@ async function downloadTiktok(url) {
  */
 function onUrls(urls) {
 	const tiktokUrls = filterTiktok(urls)
+	if (tiktokUrls.length === 0) return Promise.resolve({})
 	// download all tiktok videos
 	const downloadstasks = tiktokUrls.map(downloadTiktok)
 	return Promise.all(downloadstasks).then((files) => {
