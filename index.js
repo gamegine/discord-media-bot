@@ -50,7 +50,10 @@ client.on("message", (msg) => {
 			// reply to discord with json data
 			msg
 				.reply(json.urls, { files: json.files })
-				.then(() => {})
+				.then(() => {
+					// cleanup files after reply
+					if (json.files) json.files.forEach((file) => fs.unlinkSync(file))
+				})
 				.catch((e) => console.error("error discord reply :", e))
 		})
 		.catch((e) => console.error("error modules onUrls : ", e))
