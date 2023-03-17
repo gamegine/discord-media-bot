@@ -1,7 +1,6 @@
 // todo: Unsupported tiktok shortlink URL (requires a fetch/redirect to find the real id)
-const TikTokScraper = require("tiktok-scraper")
-const got = require("got")
-const fs = require("fs")
+const { createWriteStream, existsSync } = require("fs")
+const { pipeline } = require("stream/promises")
 
 /**
  * filter urls coressponding to tiktok video
@@ -17,57 +16,69 @@ function filterTiktok(urls) {
 }
 
 /**
- * get tiktok video meta
- * @param {String} urls
- * @returns {Array} PostCollector
+ * @param  {} url http file url
+ * @param  {} path download file path
  */
-function getVideoMeta(url) {
-	const headers = {
-		"User-Agent": "BOB",
-		Referer: "https://www.tiktok.com/",
-		Cookie: "tt_webid_v2=BOB",
-	}
-	return TikTokScraper.getVideoMeta(url, headers).then(
-		(data) => data.collector[0]
-	)
-}
+const downloadFile = async (url, path) =>
+	pipeline((await fetch(url)).body, createWriteStream(path))
+
 /**
- * download tiktok video
- * @param {String} url
- * @returns {String} file path
+ * @param  {} tiktokId tiktok video id
+ * @returns Promise of download video url
  */
-async function downloadTiktok(url) {
-	const videoMeta = await getVideoMeta(url)
+function getVideoRAWUrl(tiktokId) {
+	return new Promise((resolve, reject) => {
+		// fetch(`https://m.tiktok.com/api/item/detail/?itemId=${tiktokId}`)
+		// 	.then((response) => {
+		// 		// 	response.status_code,
+		// 		// 	response.itemInfo.itemStruct.id,
+		// 		// 	response.itemInfo.itemStruct.video.playAddr
+		// const API_URL = `https://api19-core-useast5.us.tiktokv.com/aweme/v1/feed/?aweme_id=${idVideo}&version_code=262&app_name=musical_ly&channel=App&device_id=null&os_version=14.4.2&device_platform=iphone&device_type=iPhone9`
+		const API_URL = `https://tiktokv.com/aweme/v1/feed/?aweme_id=${tiktokId}`
+		fetch(API_URL, {
+			method: "GET",
+			headers: {
+				"User-Agent":
+					"TikTok 26.2.0 rv:262018 (iPhone; iOS 14.4.2; en_US) Cronet",
+			},
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				// console.log(res.aweme_list[0].video.play_addr.url_list[0])
+				resolve(res.aweme_list[0].video.play_addr.url_list[0])
+			})
+	})
+}
+
+/**
+ * @param  {} tiktokUrl tiktok url format https://www.tiktok.com/<user>/video/<id>
+ * @returns downloaded file path
+ */
+function downloadTiktok(tiktokUrl) {
+	// get id https://www.tiktok.com/<user>/video/<id>
+	const id = tiktokUrl.split("/").pop().split("?").shift()
 	// output directory from env or default to current directory
 	const outputDir = process.env.DOWNLOAD_DIR || "."
-	const output = `${outputDir}/tiktok-${videoMeta.id}.mp4`
-	await new Promise((resolve, reject) => {
-		got
-			.stream(videoMeta.videoUrl, { headers: videoMeta.headers })
-			.pipe(fs.createWriteStream(output))
-			.on("finish", resolve)
-			.on("error", reject)
+	const output = `${outputDir}/tiktok-${id}.mp4`
+	return new Promise((resolve, reject) => {
+		getVideoRAWUrl(id)
+			.then((url) => downloadFile(url, output))
+			.then(resolve(output))
 	})
-	return output
 }
 
 /**
  * process tiktok video download and return downloader files path in json {files}
  * @param {Array} urls
- * @returns {Array} downloader files path in json {files}
+ * @returns {Array} downloaded files path in json {files}
  */
 function onUrls(urls) {
 	const tiktokUrls = filterTiktok(urls)
 	if (tiktokUrls.length === 0) return Promise.resolve({})
 	// download all tiktok videos
-	const downloadstasks = tiktokUrls.map(downloadTiktok)
-	return Promise.all(downloadstasks).then((files) => {
-		// eslint-disable-next-line no-console
-		console.log(`Downloaded ${tiktokUrls.length} tiktok videos`)
-		// finaly return all downloaded files
-		return { files }
-	})
+	const tasks = tiktokUrls.map(downloadTiktok)
+	return Promise.all(tasks).then((files) => ({ files }))
 }
 
 // exports module functions
-module.exports = { filterTiktok, getVideoMeta, downloadTiktok, onUrls }
+module.exports = { filterTiktok, onUrls, downloadTiktok, getVideoRAWUrl }
