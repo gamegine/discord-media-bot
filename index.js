@@ -58,8 +58,10 @@ client.on("message", (msg) => {
 					// cleanup files after reply
 					if (json.files) json.files.forEach((file) => fs.unlinkSync(file))
 				})
+				// eslint-disable-next-line no-console
 				.catch((e) => console.error("error discord reply :", e))
 		})
+		// eslint-disable-next-line no-console
 		.catch((e) => console.error("error modules onUrls : ", e))
 })
 

@@ -1,5 +1,5 @@
 // todo: Unsupported tiktok shortlink URL (requires a fetch/redirect to find the real id)
-const { createWriteStream, existsSync } = require("fs")
+const { createWriteStream } = require("fs")
 const { pipeline } = require("stream/promises")
 
 /**
@@ -27,7 +27,7 @@ const downloadFile = async (url, path) =>
  * @returns Promise of download video url
  */
 function getVideoRAWUrl(tiktokId) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		// fetch(`https://m.tiktok.com/api/item/detail/?itemId=${tiktokId}`)
 		// 	.then((response) => {
 		// 		// 	response.status_code,
@@ -60,7 +60,7 @@ function downloadTiktok(tiktokUrl) {
 	// output directory from env or default to current directory
 	const outputDir = process.env.DOWNLOAD_DIR || "."
 	const output = `${outputDir}/tiktok-${id}.mp4`
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		getVideoRAWUrl(id)
 			.then((url) => downloadFile(url, output))
 			.then(resolve(output))

@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 // todo: Unsupported tiktok shortlink URL (requires a fetch/redirect to find the real id)
 const fs = require("fs")
+// eslint-disable-next-line import/no-extraneous-dependencies
 global.fetch = require("node-fetch")
 const { filterTiktok, downloadTiktok } = require("../tiktok")
 
