@@ -20,7 +20,7 @@ function filterTiktok(urls) {
  * @param  {} path download file path
  */
 const downloadFile = async (url, path) =>
-	pipeline((await fetch(url)).body, createWriteStream(path))
+	pipeline((await fetch(url)).body, createWriteStream(path)).then(() => path)
 
 /**
  * @param  {} tiktokId tiktok video id
@@ -60,11 +60,7 @@ function downloadTiktok(tiktokUrl) {
 	// output directory from env or default to current directory
 	const outputDir = process.env.DOWNLOAD_DIR || "."
 	const output = `${outputDir}/tiktok-${id}.mp4`
-	return new Promise((resolve) => {
-		getVideoRAWUrl(id)
-			.then((url) => downloadFile(url, output))
-			.then(resolve(output))
-	})
+	return getVideoRAWUrl(id).then((url) => downloadFile(url, output))
 }
 
 /**
@@ -81,4 +77,4 @@ function onUrls(urls) {
 }
 
 // exports module functions
-module.exports = { filterTiktok, onUrls, downloadTiktok, getVideoRAWUrl }
+module.exports = { filterTiktok, onUrls, downloadTiktok }

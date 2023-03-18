@@ -31,12 +31,14 @@ describe("module tiktok", () => {
 		// 	).toEqual([shorturl])
 		// })
 	})
-	// describe("downloadTiktok", () => {
-	// 	testIfIntegration("get url", async () => {
-	// 		const videoPath = await downloadTiktok(url)
-	// 		console.log(videoPath) // async fail
-	// 		// check if file exists
-	// 		expect(fs.existsSync(videoPath)).toBeTruthy()
-	// 	})
-	// })
+	describe("downloadTiktok", () => {
+		testIfIntegration("get url", async () => {
+			const videoOutput = await downloadTiktok(url)
+			// check if file exists
+			expect(fs.existsSync(videoOutput)).toBeTruthy()
+			// clean
+			fs.unlinkSync(videoOutput)
+			expect(fs.existsSync(videoOutput)).toBeFalsy()
+		})
+	})
 })
