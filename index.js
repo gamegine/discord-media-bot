@@ -14,7 +14,13 @@ const config = fs.existsSync("./config.json") ? require("./config.json") : {}
 const token = config.DISCORD_TOKEN || process.env.DISCORD_TOKEN
 
 // create new discord client with token
-const client = new Discord.Client()
+const client = new Discord.Client({
+	intents: [
+		Discord.GatewayIntentBits.Guilds,
+		Discord.GatewayIntentBits.GuildMessages,
+		Discord.GatewayIntentBits.MessageContent,
+	],
+})
 
 // intercept discord events
 
@@ -27,7 +33,7 @@ client.on("error", (err) => console.error(`Error: ${err.message}`))
 client.on("ready", () => console.log(`Logged in as ${client.user.tag}!`))
 
 // for each message process
-client.on("message", (msg) => {
+client.on("messageCreate", (msg) => {
 	// ignore messages from bots
 	if (msg.author.bot) return
 	// get text from message
@@ -53,7 +59,7 @@ client.on("message", (msg) => {
 				return
 			// reply to discord with json data
 			msg
-				.reply(json.urls, { files: json.files })
+				.reply({ body: json.urls, files: json.files })
 				.then(() => {
 					// cleanup files after reply
 					if (json.files) json.files.forEach((file) => fs.unlinkSync(file))
