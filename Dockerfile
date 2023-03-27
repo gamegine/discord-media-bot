@@ -1,5 +1,4 @@
-# FROM node:16.13.2-alpine project not properly installed on apline
-FROM node:16.13.2
+FROM node:18.15-alpine
 WORKDIR /app
 ENV NODE_ENV=production
 # Install app dependencies
