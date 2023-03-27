@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [main, master, dev]
+    branches: [main, master, "dev*"]
   pull_request:
 
 jobs:
@@ -13,17 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v2.5.2
         with:
-          node-version: 16.x
+          node-version: 18.x
           cache: "npm"
       - name: cache
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v3
         with:
           path: ~/.npm # for npm, cache files are stored in
-          key: ${BRANCH_NAME}-${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
       - name: install dependencies
         run: npm install
       - name: test
