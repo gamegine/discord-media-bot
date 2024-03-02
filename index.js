@@ -58,6 +58,8 @@ client.on("messageCreate", (msg) => {
 			)
 				return
 			// reply to discord with json data
+			// eslint-disable-next-line no-console
+			console.log("reply:", json)
 			msg
 				.reply({ body: json.urls, files: json.files })
 				.then(() => {
